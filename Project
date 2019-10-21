@@ -1,0 +1,55 @@
+class Authentication(object):
+    def __init__(self, Password = ''):
+        self.Password = Password
+
+    def __lower(self):
+        lower = any(c.islower() for c in self.Password)
+        return lower
+
+    def __upper(self):
+        upper = any(c.isupper() for c in self.Password)
+        return upper
+
+    def __digit(self):
+        digit = any(c.isdigit() for c in  self.Password)
+        return digit
+
+    def validate(self):
+        lower = self.__lower()
+        upper = self.__upper()
+        digit = self.__digit()
+
+        length = len(self.Password)
+        
+        notallowed = ("pass", "word", "password")
+        
+        report =  lower and upper and digit and length >= 8
+
+        if report:
+            print("Password is usable ")
+            return True
+
+        elif not lower:
+            print("You didn't use a Lower case letter")
+            return False
+
+        elif not upper:
+            print("You didn't use a Upper case letter")
+            return False
+
+        elif length <8:
+            print("Password should have at least 8 character")
+            return False
+            
+        elif notallowed:
+            print("Word is not allowed to be used")
+            return False
+            
+        elif not digit:
+            print("You didn't use a Digit")
+            return False
+        else:
+            pass
+
+C = Authentication("Coding24")
+print(C.validate())
